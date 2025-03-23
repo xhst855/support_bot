@@ -1,0 +1,11 @@
+services:
+  telegram_bot:
+    build: ./telegram_bot
+    env_file:
+      - ./telegram_bot/.env
+    depends_on:
+      - bert_service
+  bert_service:
+    build: ./bert_service
+    ports:
+      - "8000:8000"
