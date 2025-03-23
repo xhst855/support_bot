@@ -1,4 +1,10 @@
-aiogram>=3.0.0
-requests
+aiogram==3.*
+aiohttp
+httpx
+pydantic==2.*
+pydantic-settings
 python-dotenv
-natasha
+aiosqlite
+tenacity
+transformers
+torch

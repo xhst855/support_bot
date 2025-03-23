@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     BOT_TOKEN: str
@@ -11,6 +11,6 @@ class Settings(BaseSettings):
     ZOHO_DEPARTMENT_ID: str
 
     class Config:
-        env_file = ".env"
+        env_file = "../.env"
 
 settings = Settings()

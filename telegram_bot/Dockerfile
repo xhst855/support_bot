@@ -1,28 +1,13 @@
 FROM python:3.11-slim
 
-# Устанавливаем рабочую директорию
+# Установка зависимостей
 WORKDIR /app
-
-# Устанавливаем системные зависимости
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    python3-dev \
-    gcc \
-    libffi-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Копируем файл зависимостей
-COPY requirements.txt .
-
-# Устанавливаем Python зависимости
-RUN pip install --upgrade pip setuptools wheel
+COPY telegram_bot/ /app/telegram_bot
+COPY ./telegram_bot/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копируем весь проект в контейнер
-COPY . .
+# Настройка PYTHONPATH, чтобы видеть telegram_bot как пакет
+ENV PYTHONPATH=/app
 
-# Устанавливаем переменные окружения для корректного логирования
-ENV PYTHONUNBUFFERED=1
-
-# Запуск бота
-CMD ["python", "bot.py"]
+# Запуск
+CMD ["python", "-m", "telegram_bot.bot"]

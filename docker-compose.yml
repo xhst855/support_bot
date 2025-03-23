@@ -1,11 +1,31 @@
 services:
   telegram_bot:
-    build: ./telegram_bot
+    build:
+      context: .
+      dockerfile: ./telegram_bot/Dockerfile
     env_file:
-      - ./telegram_bot/.env
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
     depends_on:
       - bert_service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   bert_service:
-    build: ./bert_service
+    build:
+      context: ./bert_service
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
