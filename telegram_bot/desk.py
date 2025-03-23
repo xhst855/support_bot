@@ -1,6 +1,6 @@
 import os
 import requests
-from logger import setup_logger
+from telegram_bot.utils.logger import setup_logger
 
 logger = setup_logger()
 

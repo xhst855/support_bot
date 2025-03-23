@@ -4,10 +4,10 @@ from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import CommandStart
 from categorize_bert import categorize_message
 from desk import create_ticket, add_comment
-from logger import setup_logger
+from telegram_bot.utils.logger import setup_logger
 from db import init_db, save_ticket, get_ticket_by_message
 from aiogram.exceptions import TelegramAPIError
-from case_handler import handle_case
+from telegram_bot.handlers.case_handler import handle_case
 
 logger = setup_logger()
 
