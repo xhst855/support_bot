@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     CRYPTOAPIS_KEY: str
     DATABASE_URL: str = "sqlite:///db.sqlite3"
     BERT_SERVICE_URL: str = "http://bert_service:8000"
+    ZOHO_DEPARTMENT_ID: str
 
     class Config:
         env_file = ".env"

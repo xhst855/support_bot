@@ -37,7 +37,6 @@ class ZohoDeskClient:
             "subject": f"Message from Telegram user {user_id}",
             "departmentId": "YOUR_DEPARTMENT_ID",
             "description": message_text,
-            "contactId": "YOUR_CONTACT_ID"
         }
         async with httpx.AsyncClient() as client:
             resp = await client.post(url, json=data, headers=self.headers())
